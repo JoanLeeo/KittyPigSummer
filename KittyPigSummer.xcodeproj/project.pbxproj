@@ -15,6 +15,11 @@
 		A79BB84E1F58FD8D0087D4A9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A79BB84C1F58FD8D0087D4A9 /* LaunchScreen.storyboard */; };
 		A79BB8591F58FD8D0087D4A9 /* KittyPigSummerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A79BB8581F58FD8D0087D4A9 /* KittyPigSummerTests.m */; };
 		A79BB8641F58FD8D0087D4A9 /* KittyPigSummerUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = A79BB8631F58FD8D0087D4A9 /* KittyPigSummerUITests.m */; };
+		A79BB87A1F5D27DD0087D4A9 /* PuzzleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A79BB8781F5D27DD0087D4A9 /* PuzzleViewController.m */; };
+		A79BB8801F5D282B0087D4A9 /* SoundsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A79BB87E1F5D282B0087D4A9 /* SoundsTableViewController.m */; };
+		A79BB8811F5D282B0087D4A9 /* PigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A79BB87F1F5D282B0087D4A9 /* PigViewController.m */; };
+		A79BB8851F5D2D180087D4A9 /* MinesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A79BB8841F5D2D180087D4A9 /* MinesViewController.m */; };
+		A79BB8881F5D2DDA0087D4A9 /* LevelModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A79BB8871F5D2DDA0087D4A9 /* LevelModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +56,16 @@
 		A79BB85F1F58FD8D0087D4A9 /* KittyPigSummerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KittyPigSummerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A79BB8631F58FD8D0087D4A9 /* KittyPigSummerUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KittyPigSummerUITests.m; sourceTree = "<group>"; };
 		A79BB8651F58FD8D0087D4A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A79BB8771F5D27DD0087D4A9 /* PuzzleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PuzzleViewController.h; sourceTree = "<group>"; };
+		A79BB8781F5D27DD0087D4A9 /* PuzzleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PuzzleViewController.m; sourceTree = "<group>"; };
+		A79BB87C1F5D282B0087D4A9 /* PigViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PigViewController.h; sourceTree = "<group>"; };
+		A79BB87D1F5D282B0087D4A9 /* SoundsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundsTableViewController.h; sourceTree = "<group>"; };
+		A79BB87E1F5D282B0087D4A9 /* SoundsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoundsTableViewController.m; sourceTree = "<group>"; };
+		A79BB87F1F5D282B0087D4A9 /* PigViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PigViewController.m; sourceTree = "<group>"; };
+		A79BB8831F5D2D180087D4A9 /* MinesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MinesViewController.h; sourceTree = "<group>"; };
+		A79BB8841F5D2D180087D4A9 /* MinesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MinesViewController.m; sourceTree = "<group>"; };
+		A79BB8861F5D2DDA0087D4A9 /* LevelModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelModel.h; sourceTree = "<group>"; };
+		A79BB8871F5D2DDA0087D4A9 /* LevelModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LevelModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +116,8 @@
 		A79BB83D1F58FD8D0087D4A9 /* KittyPigSummer */ = {
 			isa = PBXGroup;
 			children = (
+				A79BB8821F5D2BFE0087D4A9 /* Minesweeper */,
+				A79BB8761F5D27B90087D4A9 /* Puzzle */,
 				A79BB8411F58FD8D0087D4A9 /* AppDelegate.h */,
 				A79BB8421F58FD8D0087D4A9 /* AppDelegate.m */,
 				A79BB8441F58FD8D0087D4A9 /* ViewController.h */,
@@ -138,6 +155,30 @@
 				A79BB8651F58FD8D0087D4A9 /* Info.plist */,
 			);
 			path = KittyPigSummerUITests;
+			sourceTree = "<group>";
+		};
+		A79BB8761F5D27B90087D4A9 /* Puzzle */ = {
+			isa = PBXGroup;
+			children = (
+				A79BB8771F5D27DD0087D4A9 /* PuzzleViewController.h */,
+				A79BB8781F5D27DD0087D4A9 /* PuzzleViewController.m */,
+				A79BB87C1F5D282B0087D4A9 /* PigViewController.h */,
+				A79BB87F1F5D282B0087D4A9 /* PigViewController.m */,
+				A79BB87D1F5D282B0087D4A9 /* SoundsTableViewController.h */,
+				A79BB87E1F5D282B0087D4A9 /* SoundsTableViewController.m */,
+			);
+			path = Puzzle;
+			sourceTree = "<group>";
+		};
+		A79BB8821F5D2BFE0087D4A9 /* Minesweeper */ = {
+			isa = PBXGroup;
+			children = (
+				A79BB8861F5D2DDA0087D4A9 /* LevelModel.h */,
+				A79BB8871F5D2DDA0087D4A9 /* LevelModel.m */,
+				A79BB8831F5D2D180087D4A9 /* MinesViewController.h */,
+				A79BB8841F5D2D180087D4A9 /* MinesViewController.m */,
+			);
+			path = Minesweeper;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -276,9 +317,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A79BB8881F5D2DDA0087D4A9 /* LevelModel.m in Sources */,
 				A79BB8461F58FD8D0087D4A9 /* ViewController.m in Sources */,
+				A79BB8801F5D282B0087D4A9 /* SoundsTableViewController.m in Sources */,
 				A79BB8431F58FD8D0087D4A9 /* AppDelegate.m in Sources */,
+				A79BB8811F5D282B0087D4A9 /* PigViewController.m in Sources */,
+				A79BB87A1F5D27DD0087D4A9 /* PuzzleViewController.m in Sources */,
 				A79BB8401F58FD8D0087D4A9 /* main.m in Sources */,
+				A79BB8851F5D2D180087D4A9 /* MinesViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -516,6 +562,7 @@
 				A79BB86A1F58FD8D0087D4A9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A79BB86B1F58FD8D0087D4A9 /* Build configuration list for PBXNativeTarget "KittyPigSummerTests" */ = {
 			isa = XCConfigurationList;
@@ -524,6 +571,7 @@
 				A79BB86D1F58FD8D0087D4A9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A79BB86E1F58FD8D0087D4A9 /* Build configuration list for PBXNativeTarget "KittyPigSummerUITests" */ = {
 			isa = XCConfigurationList;
@@ -532,6 +580,7 @@
 				A79BB8701F58FD8D0087D4A9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
