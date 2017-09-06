@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "108636FFF5684275270A02646414D99A9DDAB9DE",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "108636FFF5684275270A02646414D99A9DDAB9DE" : 9223372036854775807,
+    "DD20A1A48C66B5213E0FEBB87A95EF51D6C6F3E8" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "978385B4-318B-45A5-840A-AD6452EE2B4C",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "108636FFF5684275270A02646414D99A9DDAB9DE" : "KittyPigSummer\/",
+    "DD20A1A48C66B5213E0FEBB87A95EF51D6C6F3E8" : ""
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "KittyPigSummer",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "KittyPigSummer.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/JoanLeeo\/KittyPigSummer.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "108636FFF5684275270A02646414D99A9DDAB9DE"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/AFNetworking\/AFNetworking.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "DD20A1A48C66B5213E0FEBB87A95EF51D6C6F3E8"
+    }
+  ]
+}
