@@ -8,7 +8,9 @@
 
 #import "_2048ViewController.h"
 
-@interface _2048ViewController ()
+@interface _2048ViewController () {
+    CGFloat _blankW;
+}
 
 @end
 
@@ -74,6 +76,7 @@
     CGFloat blankBgViewY = 0;
     CGFloat blankBgViewW = (gameBgViewW - blankGap * 5) / 4;
     CGFloat blankBgViewH = blankBgViewW;
+    _blankW = blankBgViewW;
     for (int i = 0; i < 16; i++) {
         blankBgViewX = i % 4 * (blankBgViewW + blankGap) + blankGap;
         blankBgViewY = i / 4 * (blankBgViewH + blankGap) + blankGap;
@@ -89,6 +92,14 @@
 - (void)newGameBtnAction {
     
 }
+//生成一个 2 或 4
+- (void)createNewBlank {
+    
+    
+    
+    
+}
+
 - (void)pan:(UIPanGestureRecognizer *)pan {
     
     if (pan.state == UIGestureRecognizerStateEnded) {
