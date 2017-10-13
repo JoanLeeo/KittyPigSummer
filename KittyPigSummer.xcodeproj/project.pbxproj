@@ -20,6 +20,7 @@
 		A79BB8811F5D282B0087D4A9 /* PigViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A79BB87F1F5D282B0087D4A9 /* PigViewController.m */; };
 		A79BB8851F5D2D180087D4A9 /* MinesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A79BB8841F5D2D180087D4A9 /* MinesViewController.m */; };
 		A79BB8881F5D2DDA0087D4A9 /* LevelModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A79BB8871F5D2DDA0087D4A9 /* LevelModel.m */; };
+		A7B14A8B1F90570B006977ED /* _2048ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B14A8A1F90570B006977ED /* _2048ViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +67,9 @@
 		A79BB8841F5D2D180087D4A9 /* MinesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MinesViewController.m; sourceTree = "<group>"; };
 		A79BB8861F5D2DDA0087D4A9 /* LevelModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelModel.h; sourceTree = "<group>"; };
 		A79BB8871F5D2DDA0087D4A9 /* LevelModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LevelModel.m; sourceTree = "<group>"; };
+		A7B14A891F90570B006977ED /* _2048ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = _2048ViewController.h; sourceTree = "<group>"; };
+		A7B14A8A1F90570B006977ED /* _2048ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = _2048ViewController.m; sourceTree = "<group>"; };
+		A7B14A8C1F90630A006977ED /* PigHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PigHeader.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,12 +120,14 @@
 		A79BB83D1F58FD8D0087D4A9 /* KittyPigSummer */ = {
 			isa = PBXGroup;
 			children = (
+				A7B14A851F905666006977ED /* 2048 */,
 				A79BB8821F5D2BFE0087D4A9 /* Minesweeper */,
 				A79BB8761F5D27B90087D4A9 /* Puzzle */,
 				A79BB8411F58FD8D0087D4A9 /* AppDelegate.h */,
 				A79BB8421F58FD8D0087D4A9 /* AppDelegate.m */,
 				A79BB8441F58FD8D0087D4A9 /* ViewController.h */,
 				A79BB8451F58FD8D0087D4A9 /* ViewController.m */,
+				A7B14A8C1F90630A006977ED /* PigHeader.h */,
 				A79BB8471F58FD8D0087D4A9 /* Main.storyboard */,
 				A79BB84A1F58FD8D0087D4A9 /* Assets.xcassets */,
 				A79BB84C1F58FD8D0087D4A9 /* LaunchScreen.storyboard */,
@@ -179,6 +185,15 @@
 				A79BB8841F5D2D180087D4A9 /* MinesViewController.m */,
 			);
 			path = Minesweeper;
+			sourceTree = "<group>";
+		};
+		A7B14A851F905666006977ED /* 2048 */ = {
+			isa = PBXGroup;
+			children = (
+				A7B14A891F90570B006977ED /* _2048ViewController.h */,
+				A7B14A8A1F90570B006977ED /* _2048ViewController.m */,
+			);
+			path = 2048;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -323,6 +338,7 @@
 				A79BB8431F58FD8D0087D4A9 /* AppDelegate.m in Sources */,
 				A79BB8811F5D282B0087D4A9 /* PigViewController.m in Sources */,
 				A79BB87A1F5D27DD0087D4A9 /* PuzzleViewController.m in Sources */,
+				A7B14A8B1F90570B006977ED /* _2048ViewController.m in Sources */,
 				A79BB8401F58FD8D0087D4A9 /* main.m in Sources */,
 				A79BB8851F5D2D180087D4A9 /* MinesViewController.m in Sources */,
 			);
