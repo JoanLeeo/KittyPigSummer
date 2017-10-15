@@ -7,6 +7,7 @@
 //
 
 #import "_2048ViewController.h"
+#import "PigHeader.h"
 
 @interface _2048ViewController () {
     CGFloat _blankW;
@@ -33,7 +34,8 @@
 }
 
 - (void)customUI {
-    self.view.backgroundColor = [UIColor colorWithRed:240 / 255.0 green:240 / 255.0 blue:210 / 255.0 alpha:1];
+    self.view.backgroundColor = kRGB(240, 240, 210);
+//    [UIColor colorWithRed:240 / 255.0 green:240 / 255.0 blue:210 / 255.0 alpha:1];
     
     
     //新游戏
@@ -41,7 +43,8 @@
     [newgameBtn setTitle:@"新游戏" forState:UIControlStateNormal];
     newgameBtn.frame = CGRectMake(0, 84, 100, 40);
     newgameBtn.center = CGPointMake([UIScreen mainScreen].bounds.size.width * 0.5, newgameBtn.frame.origin.y + newgameBtn.frame.size.height * 0.5);
-    newgameBtn.backgroundColor = [UIColor colorWithRed:0xc5 / 255.0 green:0xb8 / 255.0 blue:0x83 / 255.0 alpha:1];
+    newgameBtn.backgroundColor = [UIColor colorWithHexString:@"#c5b883"];
+    
     newgameBtn.layer.cornerRadius = 5;
     newgameBtn.layer.masksToBounds = YES;
     [newgameBtn addTarget:self action:@selector(newGameBtnAction) forControlEvents:UIControlEventTouchUpInside];
