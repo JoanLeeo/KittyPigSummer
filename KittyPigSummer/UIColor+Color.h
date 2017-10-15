@@ -15,4 +15,6 @@
 + (UIColor *)colorWithHexString:(NSString *)color alpha:(CGFloat)alpha;
 
 + (UIColor *)colorWithHexString:(NSString *)color;
+
++ (UIColor *)blankBgColorWithNum:(NSInteger)num;
 @end

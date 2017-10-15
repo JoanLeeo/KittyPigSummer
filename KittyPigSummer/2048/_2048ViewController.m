@@ -8,20 +8,49 @@
 
 #import "_2048ViewController.h"
 #import "PigHeader.h"
+#import "BlankModel.h"
 
 @interface _2048ViewController () {
     CGFloat _blankW;
+    UIView *gameBgView;
 }
-
+@property (nonatomic, strong) NSMutableArray *numArray;//存储响应位置数字  0 空白 > 0 响应数字 2 4 8...
+@property (nonatomic, strong) NSMutableArray *blankViewArray;
 @end
 
 @implementation _2048ViewController
+
+- (NSMutableArray *)numArray {
+    if (!_numArray) {
+        _numArray = [NSMutableArray array];
+    }
+    return _numArray;
+}
+- (NSMutableArray *)blankViewArray {
+    if (!_blankViewArray) {
+        _blankViewArray = [NSMutableArray array];
+    }
+    return _blankViewArray;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     //初始化UI
     [self customUI];
+    
+    [self newGameBtnAction];
+    
+    for (int i = 0; i < 16; i++) {
+        BlankModel *blank = [[BlankModel alloc] init];
+        blank.index = i;
+        blank.toIndex = 0;
+        blank.orgin = CGPointMake(i % 4 * (_blankW + 8) + 8, i / 4 * (_blankW + 8) + 8);
+        blank.displayNum = 0;
+        blank.blankLb = nil;
+        [self.numArray addObject:blank];
+    }
+   
     // Do any additional setup after loading the view.
 }
 
@@ -62,8 +91,9 @@
     CGFloat gameBgViewY = CGRectGetMaxY(scoreLb.frame) + 10;
     CGFloat gameBgViewW = [UIScreen mainScreen].bounds.size.width - gameBgViewX * 2;
     CGFloat gameBgViewH = gameBgViewW;
-    UIView *gameBgView = [[UIView alloc] initWithFrame:CGRectMake(gameBgViewX, gameBgViewY, gameBgViewW, gameBgViewH)];
-    gameBgView.backgroundColor = [UIColor colorWithRed:0xbb / 255.0 green:0xad / 255.0 blue:0xa0 / 255.0 alpha:1];
+    gameBgView = [[UIView alloc] initWithFrame:CGRectMake(gameBgViewX, gameBgViewY, gameBgViewW, gameBgViewH)];
+    gameBgView.backgroundColor = [UIColor colorWithHexString:@"#bbada0"];
+    
     gameBgView.layer.cornerRadius = 5;
     gameBgView.layer.masksToBounds = YES;
     [self.view addSubview:gameBgView];
@@ -71,7 +101,6 @@
     //添加滑动手势
     UIPanGestureRecognizer *panGes = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(pan:)];
     [gameBgView addGestureRecognizer:panGes];
-    
     
     
     CGFloat blankGap = 8;
@@ -84,15 +113,32 @@
         blankBgViewX = i % 4 * (blankBgViewW + blankGap) + blankGap;
         blankBgViewY = i / 4 * (blankBgViewH + blankGap) + blankGap;
         UIView *blankBgView = [[UIView alloc] initWithFrame:CGRectMake(blankBgViewX, blankBgViewY, blankBgViewW, blankBgViewH)];
-        blankBgView.backgroundColor = [UIColor colorWithRed:0xcc / 255.0 green:0xc0 / 255.0 blue:0xb3 / 255.0 alpha:1];
+        blankBgView.backgroundColor = [UIColor colorWithHexString:@"#ccc0b3"];
         blankBgView.layer.cornerRadius = 3;
         blankBgView.layer.masksToBounds = YES;
         [gameBgView addSubview:blankBgView];
         
+        UILabel *blankLb = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, blankBgViewW, blankBgViewH)];
+        blankLb.textAlignment = NSTextAlignmentCenter;
+        blankLb.font = [UIFont boldSystemFontOfSize:30];
+        blankLb.layer.cornerRadius = 3;
+        blankLb.layer.masksToBounds = YES;
+        [self.blankViewArray addObject:blankLb];
     }
     
 }
 - (void)newGameBtnAction {
+    
+   
+    NSInteger rand = arc4random() % 16;
+    
+    NSInteger random =  arc4random() % 100;
+    if (random >= 20) { //80% 生成2 20% 生成4
+        
+    } else {
+        
+        
+    }
     
 }
 //生成一个 2 或 4

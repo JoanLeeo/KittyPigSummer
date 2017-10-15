@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4DDBDCA91F91B301002049DD /* UIColor+Color.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DDBDCA81F91B300002049DD /* UIColor+Color.m */; };
+		4DF63CF31F93ADE300D84913 /* BlankModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DF63CF21F93ADE300D84913 /* BlankModel.m */; };
 		A79BB8401F58FD8D0087D4A9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A79BB83F1F58FD8D0087D4A9 /* main.m */; };
 		A79BB8431F58FD8D0087D4A9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A79BB8421F58FD8D0087D4A9 /* AppDelegate.m */; };
 		A79BB8461F58FD8D0087D4A9 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A79BB8451F58FD8D0087D4A9 /* ViewController.m */; };
@@ -45,6 +46,8 @@
 		4DDBDCA71F91B300002049DD /* UIColor+Color.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+Color.h"; sourceTree = "<group>"; };
 		4DDBDCA81F91B300002049DD /* UIColor+Color.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Color.m"; sourceTree = "<group>"; };
 		4DDBDCAA1F91B38C002049DD /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		4DF63CF11F93ADE300D84913 /* BlankModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BlankModel.h; sourceTree = "<group>"; };
+		4DF63CF21F93ADE300D84913 /* BlankModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BlankModel.m; sourceTree = "<group>"; };
 		A79BB83B1F58FD8D0087D4A9 /* KittyPigSummer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KittyPigSummer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A79BB83F1F58FD8D0087D4A9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A79BB8411F58FD8D0087D4A9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -199,6 +202,8 @@
 			children = (
 				A7B14A891F90570B006977ED /* _2048ViewController.h */,
 				A7B14A8A1F90570B006977ED /* _2048ViewController.m */,
+				4DF63CF11F93ADE300D84913 /* BlankModel.h */,
+				4DF63CF21F93ADE300D84913 /* BlankModel.m */,
 			);
 			path = 2048;
 			sourceTree = "<group>";
@@ -342,6 +347,7 @@
 				A79BB8881F5D2DDA0087D4A9 /* LevelModel.m in Sources */,
 				A79BB8461F58FD8D0087D4A9 /* ViewController.m in Sources */,
 				A79BB8801F5D282B0087D4A9 /* SoundsTableViewController.m in Sources */,
+				4DF63CF31F93ADE300D84913 /* BlankModel.m in Sources */,
 				4DDBDCA91F91B301002049DD /* UIColor+Color.m in Sources */,
 				A79BB8431F58FD8D0087D4A9 /* AppDelegate.m in Sources */,
 				A79BB8811F5D282B0087D4A9 /* PigViewController.m in Sources */,

@@ -53,4 +53,24 @@
 + (UIColor *)colorWithHexString:(NSString *)color {
     return [self colorWithHexString:color alpha:1.0];
 }
+
++ (UIColor *)blankBgColorWithNum:(NSInteger)num {
+    switch (num) {
+        case 2: return [self colorWithHexString:@"#eee4da"]; break;
+        case 4: return [self colorWithHexString:@"#ede0c8"]; break;
+        case 8: return [self colorWithHexString:@"#f2b179"]; break;
+        case 16: return [self colorWithHexString:@"#f59563"]; break;
+        case 32: return [self colorWithHexString:@"#f67c5f"]; break;
+        case 64: return [self colorWithHexString:@"#f65e3b"]; break;
+        case 128: return [self colorWithHexString:@"#edcf72"]; break;
+        case 256: return [self colorWithHexString:@"#edcc61"]; break;
+        case 512: return [self colorWithHexString:@"#99cc00"]; break;
+        case 1024: return [self colorWithHexString:@"#33b5e5"]; break;
+        case 2048: return [self colorWithHexString:@"#0099cc"]; break;
+        case 4096: return [self colorWithHexString:@"#aa66cc"]; break;
+        case 8192: return [self colorWithHexString:@"#9933c"]; break;
+        default: return [UIColor redColor]; break;
+    }
+    return [UIColor redColor];
+}
 @end
