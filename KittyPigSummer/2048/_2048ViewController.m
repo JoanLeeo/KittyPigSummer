@@ -129,11 +129,20 @@
 }
 - (void)newGameBtnAction {
     
-   
-    NSInteger rand = arc4random() % 16;
+    NSMutableArray *zeroBlankArray = [NSMutableArray array];
+    for (int i = 0; i < 16; i++) {//找到空白块的index
+        BlankModel *blankModel = self.numArray[i];
+        if (blankModel.displayNum == 0) {
+            [zeroBlankArray addObject:@(blankModel.index)];
+        }
+    }
     
+    //
+    NSInteger randTmpIndex = arc4random() % zeroBlankArray.count;
+    NSInteger randIndex = [zeroBlankArray[randTmpIndex] integerValue];
     NSInteger random =  arc4random() % 100;
     if (random >= 20) { //80% 生成2 20% 生成4
+        
         
     } else {
         
