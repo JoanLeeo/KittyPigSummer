@@ -10,6 +10,8 @@
 #import "PigHeader.h"
 #import "BlankModel.h"
 
+
+
 @interface _2048ViewController () {
     CGFloat _blankW;
     UIView *gameBgView;
@@ -40,16 +42,6 @@
     [self customUI];
     
     [self newGameBtnAction];
-    
-    for (int i = 0; i < 16; i++) {
-        BlankModel *blank = [[BlankModel alloc] init];
-        blank.index = i;
-        blank.toIndex = 0;
-        blank.orgin = CGPointMake(i % 4 * (_blankW + 8) + 8, i / 4 * (_blankW + 8) + 8);
-        blank.displayNum = 0;
-        blank.blankLb = nil;
-        [self.numArray addObject:blank];
-    }
    
     // Do any additional setup after loading the view.
 }
@@ -106,7 +98,7 @@
     CGFloat blankGap = 8;
     CGFloat blankBgViewX = 0;
     CGFloat blankBgViewY = 0;
-    CGFloat blankBgViewW = (gameBgViewW - blankGap * 5) / 4;
+    CGFloat blankBgViewW = ceilf((gameBgViewW - blankGap * 5) / 4);
     CGFloat blankBgViewH = blankBgViewW;
     _blankW = blankBgViewW;
     for (int i = 0; i < 16; i++) {
@@ -118,42 +110,67 @@
         blankBgView.layer.masksToBounds = YES;
         [gameBgView addSubview:blankBgView];
         
-        UILabel *blankLb = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, blankBgViewW, blankBgViewH)];
-        blankLb.textAlignment = NSTextAlignmentCenter;
-        blankLb.font = [UIFont boldSystemFontOfSize:30];
-        blankLb.layer.cornerRadius = 3;
-        blankLb.layer.masksToBounds = YES;
-        [self.blankViewArray addObject:blankLb];
+        //model
+        BlankModel *blank = [[BlankModel alloc] init];
+        blank.index = i;
+        blank.toIndex = -1;
+        blank.orgin = CGPointMake(blankBgViewX, blankBgViewY);
+        blank.displayNum = -1;
+        blank.blankLb = nil;
+        [self.numArray addObject:blank];
     }
     
 }
+
+
 - (void)newGameBtnAction {
     
-    NSMutableArray *zeroBlankArray = [NSMutableArray array];
-    for (int i = 0; i < 16; i++) {//找到空白块的index
+    for (int i = 0; i < 16; i++) {//清空
         BlankModel *blankModel = self.numArray[i];
-        if (blankModel.displayNum == 0) {
-            [zeroBlankArray addObject:@(blankModel.index)];
-        }
+        blankModel.displayNum = -1;
+        [blankModel.blankLb removeFromSuperview];
+        blankModel.blankLb = nil;
+        blankModel.toIndex = -1;
     }
     
-    //
-    NSInteger randTmpIndex = arc4random() % zeroBlankArray.count;
-    NSInteger randIndex = [zeroBlankArray[randTmpIndex] integerValue];
-    NSInteger random =  arc4random() % 100;
-    if (random >= 20) { //80% 生成2 20% 生成4
-        
-        
-    } else {
-        
-        
-    }
+    [self createNewBlank];
+   
     
 }
 //生成一个 2 或 4
 - (void)createNewBlank {
     
+    NSMutableArray *zeroBlankArray = [NSMutableArray array];
     
+    
+    for (int i = 0; i < 16; i++) {
+        BlankModel *blankModel = self.numArray[i];
+        if (blankModel.displayNum < 0) {
+            [zeroBlankArray addObject:@(i)];
+        }
+    }
+    //
+    
+    if (zeroBlankArray.count == 0) {//已满
+        return;
+    }
+    NSInteger randTmpIndex = arc4random() % zeroBlankArray.count;
+    NSInteger randIndex = [zeroBlankArray[randTmpIndex] integerValue];
+    NSInteger random =  arc4random() % 100;
+    NSInteger newNum = 2;
+    if (random >= 20) { //80% 生成2 20% 生成4
+        
+        newNum = 2;
+        
+    } else {
+        
+        newNum  =4;
+    }
+    
+    BlankModel *blankModel = self.numArray[randIndex];
+    blankModel.displayNum = newNum;
+    blankModel.blankLb = [self getLb];
+    [gameBgView addSubview:blankModel.blankLb];
     
     
 }
@@ -189,7 +206,20 @@
                 NSLog(@"向下滑动");
             }
         }
+        
+        [self createNewBlank];
     }
+    
+}
+
+- (UILabel *)getLb {
+    
+    UILabel *blankLb = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, _blankW, _blankW)];
+    blankLb.textAlignment = NSTextAlignmentCenter;
+    blankLb.font = [UIFont boldSystemFontOfSize:30];
+    blankLb.layer.cornerRadius = 3;
+    blankLb.layer.masksToBounds = YES;
+    return blankLb;
     
 }
 @end

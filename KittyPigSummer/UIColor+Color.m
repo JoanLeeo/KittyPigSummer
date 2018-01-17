@@ -73,4 +73,7 @@
     }
     return [UIColor redColor];
 }
++ (UIColor *)blankNumColorWithNum:(NSInteger)num {
+    return num > 4 ? [UIColor whiteColor] : [UIColor colorWithHexString:@"#776e65"];
+}
 @end

@@ -15,6 +15,6 @@
 @property (nonatomic, assign) CGPoint orgin; //滑块位置
 @property (nonatomic, assign) NSInteger displayNum; //显示数字
 
-@property (nonatomic, strong) UIView *blankLb; //label
+@property (nonatomic, strong) UILabel *blankLb; //label
 
 @end

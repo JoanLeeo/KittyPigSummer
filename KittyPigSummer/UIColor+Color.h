@@ -17,4 +17,5 @@
 + (UIColor *)colorWithHexString:(NSString *)color;
 
 + (UIColor *)blankBgColorWithNum:(NSInteger)num;
++ (UIColor *)blankNumColorWithNum:(NSInteger)num;
 @end
