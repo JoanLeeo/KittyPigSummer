@@ -10,12 +10,11 @@
 
 @interface CellModel : NSObject
 
-@property (nonatomic, assign) NSInteger start1;
-@property (nonatomic, assign) NSInteger start2;
+@property (nonatomic, assign) NSInteger start;
 @property (nonatomic, assign) NSInteger end;
 @property (nonatomic, assign) NSUInteger value;
 @property (nonatomic, assign) BOOL isMerged;//是否合并
-@property (nonatomic, assign) BOOL isMoved;//是否移动
+//@property (nonatomic, assign) BOOL isMoved;//是否移动
 
 + (instancetype)cellModel;
 @end

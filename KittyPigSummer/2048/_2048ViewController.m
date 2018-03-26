@@ -12,9 +12,10 @@
 #import "CellView.h"
 
 
-#define POP_START_SCALE 0.1
+#define POP_START_SCALE 0.0
 #define POP_END_SCALE 1.0
 #define ANIMATION_TIME .3f
+#define DELAY_TIME .2f
 
 typedef NS_ENUM(NSInteger, CellMoveDrection) {
     CellMoveDrectionUp = 0,
@@ -27,6 +28,7 @@ typedef NS_ENUM(NSInteger, CellMoveDrection) {
     CGFloat _blankW;
     CGFloat _blankGap;
     UIView *gameBgView;
+    UIView *cellBgView;
 }
 @property (nonatomic, strong) NSMutableArray *numArray;//存储响应位置数字  0 空白 > 0 响应数字 2 4 8...
 @property (nonatomic, strong) NSMutableArray *blankViewArray;
@@ -56,25 +58,33 @@ typedef NS_ENUM(NSInteger, CellMoveDrection) {
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    if ([self.navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]){
+        self.navigationController.interactivePopGestureRecognizer.enabled = NO;
+    }
+    
+    
     //初始化UI
     [self customUI];
     
-//    [self newGameBtnAction];
-   
+    //    [self newGameBtnAction];
+    
     // Do any additional setup after loading the view.
 }
-
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     
     
-   
+    
     // Dispose of any resources that can be recreated.
 }
 
 - (void)customUI {
     self.view.backgroundColor = kRGB(240, 240, 210);
-//    [UIColor colorWithRed:240 / 255.0 green:240 / 255.0 blue:210 / 255.0 alpha:1];
+    //    [UIColor colorWithRed:240 / 255.0 green:240 / 255.0 blue:210 / 255.0 alpha:1];
     
     
     //新游戏
@@ -110,7 +120,7 @@ typedef NS_ENUM(NSInteger, CellMoveDrection) {
     
     //添加滑动手势
     UIPanGestureRecognizer *panGes = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGes:)];
-    [gameBgView addGestureRecognizer:panGes];
+    [self.view addGestureRecognizer:panGes];
     
     
     _blankGap = 8;
@@ -129,6 +139,11 @@ typedef NS_ENUM(NSInteger, CellMoveDrection) {
         [gameBgView addSubview:blankBgView];
     }
     
+    cellBgView = [[UIView alloc] initWithFrame:CGRectMake(gameBgViewX, gameBgViewY, gameBgViewW, gameBgViewH)];
+    cellBgView.backgroundColor = [UIColor clearColor];
+    [self.view addSubview:cellBgView];
+    
+    
 }
 
 
@@ -136,68 +151,52 @@ typedef NS_ENUM(NSInteger, CellMoveDrection) {
     
     CellView *cell = [self createNewBlank];
     
-    if (cell) {
-        cell.layer.affineTransform = CGAffineTransformMakeScale(POP_START_SCALE, POP_START_SCALE);
-         [gameBgView addSubview:cell];
-        [UIView animateWithDuration:ANIMATION_TIME animations:^{
-            cell.layer.affineTransform = CGAffineTransformIdentity;
-        }];
-    }
+   
     
 }
 - (NSArray *)moveModel:(NSArray *)cellArr {
-
+    
     NSMutableArray *moveArr = [NSMutableArray array];
-    BOOL isMoved = NO;
     for (int i = 0; i < cellArr.count; i++) {//先把0，移除
         NSUInteger num = [cellArr[i] unsignedIntegerValue];
-        if (num == 0) {
-            isMoved = YES;
-        } else {
+        if (num != 0) {
             CellModel *cellModel = [CellModel cellModel];
-            cellModel.isMoved = isMoved;
-            cellModel.start1 = i;
+            cellModel.start = i;
             cellModel.value = num;
             [moveArr addObject:cellModel];
         }
     }
     
     int i = 0;
-    NSMutableArray *moveArr2 = [NSMutableArray array];
+    int end = 0;
     while (YES) {//合并
         if (i + 1 >= moveArr.count) {//如果只有一个元素，或者越界了,退出
             if (i + 1 == moveArr.count) {//如果只有一个元素
                 CellModel *cellModel = moveArr[i];
-                cellModel.end = i;
-                [moveArr2 addObject:moveArr[i]];
+                cellModel.end = end;
             }
             break;
         }
         CellModel *cellModel1 = moveArr[i];
         CellModel *cellModel2 = moveArr[i+1];
-        cellModel1.end = i;
+        cellModel1.end = end;
         if (cellModel1.value == cellModel2.value) {
-            cellModel1.start2 = cellModel2.start1;
-            cellModel1.isMerged = YES;
+            cellModel2.end = end;
+            cellModel2.isMerged = YES;
             cellModel1.value = cellModel1.value * 2;
-            [moveArr2 addObject:cellModel1];
             i += 2;
         } else {
-            [moveArr2 addObject:cellModel1];
             i++;
         }
-    }
-    for (int i = 0; i < moveArr2.count; i++) {
-        CellModel *model = moveArr2[i];
-        model.end = i;
+        end++;
     }
     
-    for (CellModel *model in moveArr2) {
-        NSLog(@"start1 = %ld, start2 = %ld, end = %ld", model.start1, model.start2, model.end);
-       
+    for (CellModel *model in moveArr) {
+        NSLog(@"cellArr = %@, start = %ld, end = %ld", cellArr, model.start, model.end);
+        
     }
-     NSLog(@"------\n");
-    return moveArr2;
+    NSLog(@"------\n");
+    return moveArr;
     
 }
 //生成一个 2 或 4
@@ -229,6 +228,17 @@ typedef NS_ENUM(NSInteger, CellMoveDrection) {
     
     CellView *cell = [CellView createCellViewPosition:position cellWidth:_blankW value:value];
     [self.cellModelDict setObject:cell forKey:keyIndexPath];
+    
+    if (cell) {
+        cell.layer.affineTransform = CGAffineTransformMakeScale(POP_START_SCALE, POP_START_SCALE);
+        [cellBgView insertSubview:cell atIndex:0];
+        
+        [UIView animateWithDuration:ANIMATION_TIME delay:DELAY_TIME options:0 animations:^{
+            cell.layer.affineTransform = CGAffineTransformIdentity;
+        } completion:nil];
+    }
+    
+    
     return cell;
     
 }
@@ -249,11 +259,11 @@ typedef NS_ENUM(NSInteger, CellMoveDrection) {
             
             if (translation.x < 0) {
                 //向左滑动
-//                [self moveDirection:CellMoveDrectionLeft];
+                [self moveDirection:CellMoveDrectionLeft];
                 NSLog(@"向左滑动");
             }else{
                 //向右滑动
-//                [self moveDirection:CellMoveDrectionRight];
+                [self moveDirection:CellMoveDrectionRight];
                 NSLog(@"向右滑动");
             }
             
@@ -268,8 +278,6 @@ typedef NS_ENUM(NSInteger, CellMoveDrection) {
                 NSLog(@"向下滑动");
             }
         }
-        
-        [self createNewBlank];
     }
     
 }
@@ -277,11 +285,6 @@ typedef NS_ENUM(NSInteger, CellMoveDrection) {
 - (void)moveDirection:(CellMoveDrection)direction {
     
     switch (direction) {
-        case CellMoveDrectionDown:
-        {
-            
-            break;
-        }
         case CellMoveDrectionUp:
         {
             for (int column = 0; column < 4; column++) {
@@ -299,65 +302,149 @@ typedef NS_ENUM(NSInteger, CellMoveDrection) {
                 NSArray *moveModelArr =  [self moveModel:cellArr];
                 [self moveCellView:moveModelArr direction:direction index:column];
             }
+            NSLog(@"完成-- %@",self.cellModelDict);
+            break;
+        }
+        case CellMoveDrectionDown:
+        {
+            for (int column = 0; column < 4; column++) {
+                
+                NSMutableArray *cellArr = [NSMutableArray array];
+                for (int row = 3; row >= 0; row--) {
+                    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:column];
+                    CellView *cellView = self.cellModelDict[indexPath];
+                    if (cellView) {
+                        [cellArr addObject:@(cellView.value)];
+                    } else {
+                        [cellArr addObject:@0];
+                    }
+                }
+                NSArray *moveModelArr =  [self moveModel:cellArr];
+                [self moveCellView:moveModelArr direction:direction index:column];
+            }
+            NSLog(@"完成-- %@",self.cellModelDict);
             break;
         }
         case CellMoveDrectionLeft:
         {
+            for (int row = 0; row < 4; row++) {
+                
+                NSMutableArray *cellArr = [NSMutableArray array];
+                for (int column = 0; column < 4; column++) {
+                    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:column];
+                    CellView *cellView = self.cellModelDict[indexPath];
+                    if (cellView) {
+                        [cellArr addObject:@(cellView.value)];
+                    } else {
+                        [cellArr addObject:@0];
+                    }
+                }
+                NSArray *moveModelArr =  [self moveModel:cellArr];
+                [self moveCellView:moveModelArr direction:direction index:row];
+            }
+            NSLog(@"完成-- %@",self.cellModelDict);
             break;
         }
         case CellMoveDrectionRight:
         {
+            for (int row = 0; row < 4; row++) {
+                
+                NSMutableArray *cellArr = [NSMutableArray array];
+                for (int column = 3; column >= 0; column--) {
+                    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:row inSection:column];
+                    CellView *cellView = self.cellModelDict[indexPath];
+                    if (cellView) {
+                        [cellArr addObject:@(cellView.value)];
+                    } else {
+                        [cellArr addObject:@0];
+                    }
+                }
+                NSArray *moveModelArr =  [self moveModel:cellArr];
+                [self moveCellView:moveModelArr direction:direction index:row];
+            }
+            NSLog(@"完成-- %@",self.cellModelDict);
             break;
         }
         default:
             break;
     }
-    
+    [self createNewBlank];
     
 }
 - (void)moveCellView:(NSArray *)moveModelArr direction:(CellMoveDrection)direction index:(NSUInteger)index{
     
     
+    BOOL isReverse = NO;//是否是反向的
+    BOOL isHorizontal = NO;//是否水平方向
+    
+    switch (direction) {
+        case CellMoveDrectionUp:
+            isReverse = NO;
+            isHorizontal = NO;
+            break;
+        case CellMoveDrectionDown:
+            isReverse = YES;
+            isHorizontal = NO;
+            break;
+        case CellMoveDrectionLeft:
+            isReverse = NO;
+            isHorizontal = YES;
+            break;
+        case CellMoveDrectionRight:
+            isReverse = YES;
+            isHorizontal = YES;
+            break;
+        default:
+            break;
+    }
+    
     for (int i = 0; i < moveModelArr.count; i++) {
-        CellModel *model = moveModelArr[i];
         
-        if (model.start2 >=0 && model.start2 != model.end) {
-            NSIndexPath *startIndexPath = [NSIndexPath indexPathForRow:model.start2 inSection:index];
-            NSIndexPath *endIndexPath = [NSIndexPath indexPathForRow:model.end inSection:index];
+        CellModel *model = moveModelArr[i];
+        NSInteger start = isReverse ? (3 - model.start) : model.start;
+        NSInteger end = isReverse ? (3 - model.end) : model.end;
+        NSInteger startRow = isHorizontal ? index : start;
+        NSInteger startColumn = isHorizontal ? start : index;
+        NSInteger endRow = isHorizontal ? index : end;
+        NSInteger endColumn = isHorizontal ? end : index;
+        
+        NSIndexPath *startIndexPath = [NSIndexPath indexPathForRow:startRow inSection:startColumn];
+        NSIndexPath *endIndexPath = [NSIndexPath indexPathForRow:endRow inSection:endColumn];
+        if (start != end) {
             CellView *cellView = self.cellModelDict[startIndexPath];
+            
             [self.cellModelDict removeObjectForKey:startIndexPath];
+            if (!model.isMerged) {
+                [self.cellModelDict setObject:cellView forKey:endIndexPath];
+            }
+            
             CGRect originRect = cellView.frame;
             originRect.origin = [self createPointIdnexPath:endIndexPath];
             [UIView animateWithDuration:ANIMATION_TIME animations:^{
                 cellView.frame = originRect;
             } completion:^(BOOL finished) {
-                [cellView removeFromSuperview];
+                cellView.value = model.value;
+                if (model.isMerged) {
+                    [cellView removeFromSuperview];
+                }
             }];
-        }
-        
-        if (model.start1 >= 0) {
-            NSIndexPath *startIndexPath = [NSIndexPath indexPathForRow:model.start1 inSection:index];
-            NSIndexPath *endIndexPath = [NSIndexPath indexPathForRow:model.end inSection:index];
-            if (model.start1 != model.end) {
-                CellView *cellView = self.cellModelDict[startIndexPath];
-                
-                CGRect originRect = cellView.frame;
-                originRect.origin = [self createPointIdnexPath:endIndexPath];
-                [UIView animateWithDuration:ANIMATION_TIME animations:^{
-                    cellView.frame = originRect;
-                } completion:^(BOOL finished) {
-                    cellView.value = model.value;
-                }];
-                [self.cellModelDict removeObjectForKey:startIndexPath];
-                [self.cellModelDict setObject:cellView forKey:endIndexPath];
-            } else {
-                CellView *endCellView = self.cellModelDict[endIndexPath];
+        } else {
+            
+            
+//            [UIView animateWithDuration:ANIMATION_TIME animations:^{
+//                CellView *endCellView = self.cellModelDict[endIndexPath];
+//                endCellView.value = model.value;
+//            } completion:^(BOOL finished) {
+//
+//            }];
+            
+            CellView *endCellView = self.cellModelDict[endIndexPath];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(ANIMATION_TIME * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 endCellView.value = model.value;
-            }
+            });
         }
         
     }
-    
     
 }
 //获得cell的orgin

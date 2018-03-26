@@ -12,9 +12,8 @@
 
 + (instancetype)cellModel {
     CellModel *model = [[CellModel alloc] init];
-    model.start1 = -1;
-    model.start2 = -1;
-    model.end = -1;
+//    model.start = -1;
+//    model.end = -1;
     return model;
 }
 
