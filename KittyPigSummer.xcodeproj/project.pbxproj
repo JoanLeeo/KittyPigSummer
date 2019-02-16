@@ -285,7 +285,7 @@
 				TargetAttributes = {
 					A79BB83A1F58FD8D0087D4A9 = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = X4UZC9J3G4;
+						DevelopmentTeam = 88H9284LM6;
 						ProvisioningStyle = Automatic;
 					};
 					A79BB8531F58FD8D0087D4A9 = {
@@ -515,7 +515,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = X4UZC9J3G4;
+				DEVELOPMENT_TEAM = 88H9284LM6;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = KittyPigSummer/PrefixHeader.pch;
 				INFOPLIST_FILE = KittyPigSummer/Info.plist;
@@ -530,7 +530,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = X4UZC9J3G4;
+				DEVELOPMENT_TEAM = 88H9284LM6;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = KittyPigSummer/PrefixHeader.pch;
 				INFOPLIST_FILE = KittyPigSummer/Info.plist;

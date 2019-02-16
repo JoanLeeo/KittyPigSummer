@@ -32,7 +32,7 @@
     
     int _stepCount; //计步器
     
-    NSInteger _bestRecord;
+    NSInteger _bestRecord;//最佳纪录
     
     
     
@@ -73,9 +73,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     _bestRecord = [[NSUserDefaults standardUserDefaults] integerForKey:@"bestRecord"];
+    if (_bestRecord == 0) {
+        _bestRecord = INT_MAX;
+    }
     
     if (_bestRecord != INT_MAX) {
         self.bestRecordLb.text = [NSString stringWithFormat:@"你的最佳记录：%ld", (long)_bestRecord];
+    } else {
+       self.bestRecordLb.text = [NSString stringWithFormat:@"暂无最佳纪录"];
     }
     
     _stepCount = 0;
@@ -166,79 +171,43 @@
 
 
 #pragma mark - Btn Action
+
+
+
 - (void)puzzleBtnAction:(UIButton *)puzzleBtn {
     
     
     NSInteger index = puzzleBtn.tag;
-    
+    NSInteger toIndex = 0;
+    //查找空白单元在哪个位置（上，下，左，右）
     //上
-    NSInteger upIndex = index - _difficulty;
-    if (upIndex >= 0 && [self.randomNums[upIndex] intValue] == _puzzleCount - 1) {
+    toIndex = index - _difficulty;
+    if (toIndex >= 0 && [self.randomNums[toIndex] intValue] == _puzzleCount - 1) {
         
-        CGPoint maxPuzzleBtnCenter = _maxPuzzleBtn.center;
-        CGPoint puzzleBtnCenter = puzzleBtn.center;
-        _maxPuzzleBtn.tag = index;
-        puzzleBtn.tag = upIndex;
-        self.randomNums[upIndex] = @([self.randomNums[index] intValue]);
-        self.randomNums[index] = @(_puzzleCount - 1);
-        [UIView animateWithDuration:0.35 animations:^{
-            puzzleBtn.center = maxPuzzleBtnCenter;
-            _maxPuzzleBtn.center = puzzleBtnCenter;
-        }];
-        
+        [self moveBtn:puzzleBtn toIndex:toIndex];
         [self isWin];
-        
         return;
-        
     }
     //下
-    NSInteger downIndex = index + _difficulty;
-    if (downIndex <= _puzzleCount - 1 && [self.randomNums[downIndex] intValue] == _puzzleCount - 1) {
-        CGPoint maxPuzzleBtnCenter = _maxPuzzleBtn.center;
-        CGPoint puzzleBtnCenter = puzzleBtn.center;
-        _maxPuzzleBtn.tag = index;
-        puzzleBtn.tag = downIndex;
-        self.randomNums[downIndex] = @([self.randomNums[index] intValue]);
-        self.randomNums[index] = @(_puzzleCount - 1);
-        [UIView animateWithDuration:0.35 animations:^{
-            puzzleBtn.center = maxPuzzleBtnCenter;
-            _maxPuzzleBtn.center = puzzleBtnCenter;
-        }];
-        
+    toIndex = index + _difficulty;
+    if (toIndex <= _puzzleCount - 1 && [self.randomNums[toIndex] intValue] == _puzzleCount - 1) {
+        [self moveBtn:puzzleBtn toIndex:toIndex];
         [self isWin];
         return;
     }
     //左
-    NSInteger leftIndex = index - 1;
-    if (index % _difficulty > 0 && [self.randomNums[leftIndex] intValue] == _puzzleCount - 1) {
-        CGPoint maxPuzzleBtnCenter = _maxPuzzleBtn.center;
-        CGPoint puzzleBtnCenter = puzzleBtn.center;
-        _maxPuzzleBtn.tag = index;
-        puzzleBtn.tag = leftIndex;
-        self.randomNums[leftIndex] = @([self.randomNums[index] intValue]);
-        self.randomNums[index] = @(_puzzleCount - 1);
-        [UIView animateWithDuration:0.35 animations:^{
-            puzzleBtn.center = maxPuzzleBtnCenter;
-            _maxPuzzleBtn.center = puzzleBtnCenter;
-        }];
+    toIndex = index - 1;
+    if (index % _difficulty > 0 && [self.randomNums[toIndex] intValue] == _puzzleCount - 1) {
         
+        [self moveBtn:puzzleBtn toIndex:toIndex];
         [self isWin];
         return;
     }
     //右
-    NSInteger rightIndex = index + 1;
-    if (index % _difficulty < _difficulty - 1 && [self.randomNums[rightIndex] intValue] == _puzzleCount - 1) {
-        CGPoint maxPuzzleBtnCenter = _maxPuzzleBtn.center;
-        CGPoint puzzleBtnCenter = puzzleBtn.center;
-        _maxPuzzleBtn.tag = index;
-        puzzleBtn.tag = rightIndex;
-        self.randomNums[rightIndex] = @([self.randomNums[index] intValue]);
-        self.randomNums[index] = @(_puzzleCount - 1);
-        [UIView animateWithDuration:0.35 animations:^{
-            puzzleBtn.center = maxPuzzleBtnCenter;
-            _maxPuzzleBtn.center = puzzleBtnCenter;
-        }];
-        
+    toIndex = index + 1;
+    if (index % _difficulty < _difficulty - 1 && [self.randomNums[toIndex] intValue] == _puzzleCount - 1) {
+       
+        [self moveBtn:puzzleBtn toIndex:toIndex];
         [self isWin];
         return;
     }
@@ -412,15 +381,31 @@
     }
     
 }
-- (void)isWin {
+//移动
+- (void)moveBtn:(UIButton *)puzzleBtn toIndex:(NSInteger)toIndex {
     
-    
-    
-    _stepCount++;
-    
-    self.stepCountLb.text = [NSString stringWithFormat:@"%d", _stepCount];
+    NSInteger index = puzzleBtn.tag;
+    CGPoint maxPuzzleBtnCenter = _maxPuzzleBtn.center;
+    CGPoint puzzleBtnCenter = puzzleBtn.center;
+    _maxPuzzleBtn.tag = index;
+    puzzleBtn.tag = toIndex;
+    self.randomNums[toIndex] = @([self.randomNums[index] intValue]);
+    self.randomNums[index] = @(_puzzleCount - 1);
     
     AudioServicesPlaySystemSound(_sound);
+    [UIView animateWithDuration:0.35 animations:^{
+        puzzleBtn.center = maxPuzzleBtnCenter;
+        _maxPuzzleBtn.center = puzzleBtnCenter;
+    }];
+    
+    //更新数据
+    _stepCount++;
+    self.stepCountLb.text = [NSString stringWithFormat:@"%d", _stepCount];
+    
+    
+}
+//判断是否赢了
+- (void)isWin {
     
     NSInteger count = 0;
     for (int i = 0; i < _puzzleCount; i++) {
@@ -430,7 +415,7 @@
         count++;
     }
     if (count == _puzzleCount) {
-        ;
+        
         UIAlertController *alert =  [UIAlertController alertControllerWithTitle:@"恭喜你" message:[NSString stringWithFormat:@"用了%ld步成功过关！", (long)_stepCount] preferredStyle:UIAlertControllerStyleAlert];
         [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
             if (_stepCount < _bestRecord) {
@@ -449,7 +434,7 @@
     //随机数字
     int inverCount = 0;
     while (1) {
-        NSMutableArray *initializeNums = [NSMutableArray array];//初始化0-n数字
+        NSMutableArray *initializeNums = [NSMutableArray array];//初始化0 - （n-1）数字
         for (int i = 0; i < _puzzleCount; i++) {
             [initializeNums addObject:@(i)];
         }
@@ -465,6 +450,10 @@
             
         }
         //判断是否可还原拼图
+        /*具体参考
+         https://www.cnblogs.com/idche/archive/2012/04/25/2469516.html
+         https://blog.csdn.net/tailzhou/article/details/3002442
+         */
         inverCount = 0;
         int curNum = 0;
         int nextNum = 0;
@@ -482,74 +471,11 @@
             }
             
         }
-        if (!(inverCount % 2)) {//对2求余，余0，逆序数为偶数，即偶排列；否则，为奇排列
+        if (!(inverCount % 2)) {//对2求余，余0，逆序数为偶数，即偶排列；否则，为奇排列。因为0-（n-1)的排序是偶排列
             return randomNums;
         }
         
     }
-}
-
-- (NSMutableArray *)getNewAvailableRandomNums2 {
-    
-    NSMutableArray *randomNums = [NSMutableArray array];//随机数组 - 初始化0-n数字
-    for (int i = 0; i < _puzzleCount; i++) {
-        [randomNums addObject:@(i)];
-    }
-    
-    int randCount = _puzzleCount * _puzzleCount;
-    int randDirection = 0; //0 上 1 下 2 左 3 右
-    BOOL aliableDirection = NO;
-    int blankIndex = 8;
-    int index = 0;
-    while (randCount--) {
-        
-        aliableDirection = NO;
-        randDirection = arc4random() % 4;
-        while (1) {
-            switch (randDirection) {
-                case 0:
-                    
-                    if (blankIndex / _difficulty > 0) {
-                        index = blankIndex - _difficulty;
-                        aliableDirection = YES;
-                    }
-                    break;
-                case 1:
-                    
-                    if (blankIndex / _difficulty < _difficulty - 1) {
-                        index = blankIndex + _difficulty;
-                        aliableDirection = YES;
-                    }
-                    break;
-                case 2:
-                    
-                    if (blankIndex % _difficulty > 0) {
-                        index = blankIndex - 1;
-                        aliableDirection = YES;
-                    }
-                    break;
-                case 3:
-                    
-                    if (blankIndex % _difficulty < _difficulty - 1) {
-                        index = blankIndex + 1;
-                        aliableDirection = YES;
-                    }
-                    break;
-                default:
-                    break;
-            }
-            if (aliableDirection == YES) {
-                break;
-            }
-            randDirection = (randDirection + 1) % 4;
-        }
-        
-        randomNums[blankIndex] = @([randomNums[index] intValue]);
-        randomNums[index] = @(8);
-        blankIndex = index;
-        
-    }
-    return randomNums;
 }
 
 - (void)changePig:(NSInteger)index {

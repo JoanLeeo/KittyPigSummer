@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="PIy-du-on3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="PIy-du-on3">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
-        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -33,15 +30,15 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JIL-i8-NoG">
-                                <rect key="frame" x="123" y="199" width="92" height="30"/>
+                                <rect key="frame" x="159" y="177" width="31" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="挖雷的小姑娘"/>
+                                <state key="normal" title="挖雷"/>
                                 <connections>
                                     <segue destination="N9e-fy-GZc" kind="push" id="NJV-ia-q1O"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M0B-tS-hbf">
-                                <rect key="frame" x="148" y="341" width="37" height="30"/>
+                                <rect key="frame" x="156" y="215" width="37" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="2048"/>
                                 <connections>
@@ -215,7 +212,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Xa-F1-i90" userLabel="Button2">
-                                <rect key="frame" x="8" y="72" width="176" height="176"/>
+                                <rect key="frame" x="8" y="72" width="175.5" height="175.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="9Xa-F1-i90" secondAttribute="height" multiplier="1:1" id="x7C-hQ-wnj"/>
                                 </constraints>
@@ -323,7 +320,7 @@
                                 <rect key="frame" x="-4" y="64" width="383" height="60"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gch-Ef-ggE">
-                                        <rect key="frame" x="50" y="19" width="42" height="21"/>
+                                        <rect key="frame" x="50" y="19.5" width="42" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="iUQ-Qc-Uq9"/>
                                         </constraints>
@@ -451,7 +448,7 @@
         <image name="1" width="300" height="300"/>
         <image name="2" width="200" height="200"/>
         <image name="3" width="540" height="540"/>
-        <image name="4" width="709" height="709"/>
+        <image name="4" width="7292.5712890625" height="7292.5712890625"/>
         <image name="clock" width="40" height="40"/>
         <image name="flag_clear_bg" width="40" height="40"/>
         <image name="more" width="22" height="22"/>
